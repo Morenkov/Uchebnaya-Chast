@@ -12,7 +12,7 @@ $(document).ready(function () {
             url: '/admin/getInfo'
         }).fail(function (error) {
             console.log(error);
-            console.log('AJAX call failed :(');
+            console.log('AJAX call failed');
         }).done(function (data) {
             append(data)
         });
@@ -93,8 +93,8 @@ $(document).ready(function () {
         console.log(DISCIPLINE_DATA);
         for (var i = 0; i < DISCIPLINE_DATA.length; i++) {
             assessmentValues.push({
-                assessment: $('#add-person-group-assessment'+i+' option:selected').text(),
-                discipline: $('#add-person-group-discipline'+i+'').val()
+                assessment: $('#add-person-group-assessment' + i + ' option:selected').text(),
+                discipline: $('#add-person-group-discipline' + i + '').val()
             })
         }
         studInsertDataTransformObject.assessmentValues = assessmentValues;

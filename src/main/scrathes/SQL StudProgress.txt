@@ -1,0 +1,48 @@
+SQL SCRIPT FOR SELECT SINGLE STUDENT BY FIRSTNAME AND SECONDNAME;
+
+Select DateTable.date, assessment.assessment, Discipline.disciplineName
+FROM Person, PersonToDiscipline, Discipline, Assessment, DateTable
+WHERE Person.personFirstName = 'f'
+AND Person.personSecondName = 'f'
+AND Person.idPerson = persontodiscipline.idPerson
+AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline
+AND PersonToDiscipline.idAssessment = Assessment.idAssessment
+AND PersonToDiscipline.idDate = DateTable.idDate;
+
+FOR SELECTING WHOLE GROUP PROGRESS;
+
+Select DateTable.date, assessment.assessment, Discipline.disciplineName, Person.personFirstName, Person.personSecondName
+FROM Person, PersonToDiscipline, Discipline, Assessment, DateTable, GroupTable, Speciality
+WHERE Speciality.specialityName = 'РКЛМ'
+AND Speciality.idSpeciality = Person.idSpeciality  
+AND GroupTable.GroupName = '12'
+AND GroupTable.idGroup = Person.idGroup
+AND Person.idPerson = PersonToDiscipline.idPerson
+AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline
+AND PersonToDiscipline.idAssessment = Assessment.idAssessment
+AND PersonToDiscipline.idDate = DateTable.idDate;
+
+SELECT disciplineName FROM Speciality s, SpecialityToDiscipline std, Discipline d WHERE s.specialityName = 'ИБС'
+                AND s.idSpeciality = std.idSpeciality
+                AND std.idDiscipline = d.idDiscipline
+
+
+Select DateTable.date, assessment.assessment, Discipline.disciplineName, Person.personFirstName, Person.personSecondName
+FROM Person, PersonToDiscipline, Discipline, Assessment, DateTable, GroupTable, Speciality
+WHERE Speciality.specialityName = 'ПИНЖ'
+AND Speciality.idSpeciality = Person.idSpeciality
+AND GroupTable.GroupName = '11'
+AND GroupTable.idGroup = Person.idGroup
+AND Person.idPerson = PersonToDiscipline.idPerson
+AND PersonToDiscipline.idDiscipline = Discipline.idDiscipline
+AND PersonToDiscipline.idAssessment = Assessment.idAssessment
+AND PersonToDiscipline.idDate = DateTable.idDate;
+
+select p.personFirstName, p.personSecondName, a.assessment, dt.date, d.disciplineName
+from personToDiscipline ptd, person p, dateTable dt, assessment a, discipline d
+where dt.idDate = ptd.idDate
+and a.idAssessment = ptd.idAssessment
+and d.idDiscipline = ptd.idDiscipline
+and p.idPerson = ptd.idPerson
+and a.idAssessment < 3
+order by p.personSecondName;
